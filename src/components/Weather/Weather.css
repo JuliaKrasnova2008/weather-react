@@ -13,3 +13,15 @@
     height: 200px;
     object-fit: contain;
 }
+@media screen and (max-width: 470px) {
+    .weather__main-img {
+        width: 160px;
+        height: 160px;
+    }
+    .weather {
+        gap: 20px;
+    }
+    .weather-report {
+        margin-bottom: 30px;
+    }
+}

@@ -78,8 +78,6 @@
 .modal__weather-city {
     text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
     font-family: Overpass;
-    font-size: 18px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
     font-size: 24px;
@@ -150,4 +148,30 @@
     float: right;
     padding-left: 0.33em;
     background: white;
+}
+@media screen and (max-width: 650px) {
+    .modal {
+        padding: 17px 17px;
+    }
+    .modal__title {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .modal__close-button {
+        top: 15px;
+        width: 10px;
+        height: 10px;
+    }
+    .modal__weather-city {
+        font-size: 18px;
+    }
+    .modal__weather-date {
+        font-size: 12px;
+    }
+    .modal__weather-block {
+        width: 100%;
+    }
+    .modal__weather-indicator {
+        font-size: 12px;
+    }
 }

@@ -24,3 +24,11 @@
     cursor: pointer;
     border: none;
 }
+@media screen and (max-width: 470px) {
+    .forecast-report__link {
+        padding: 10px 16px;
+    }
+    .forecast-report__link {
+        font-size: 15px;
+    }
+}

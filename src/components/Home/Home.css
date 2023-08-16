@@ -72,3 +72,27 @@
     font-weight: 700;
     line-height: normal;
 }
+@media screen and (max-width: 470px) {
+    .home {
+        padding: 15px 15px;
+    }
+    .home__button__theme {
+        gap: 7px;
+        right: 20px;
+        top: 17px;
+    }
+    .button__theme,
+    .button__theme_active {
+        font-size: 14px;
+    }
+    img.home__geolocation-img {
+        width: 20px;
+        height: 20px;
+    }
+    .home__city {
+        font-size: 18px;
+    }
+    .home__map {
+        gap: 15px;
+    }
+}

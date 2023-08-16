@@ -1,22 +1,15 @@
-.scroll::-webkit-scrollbar {
-    -webkit-appearance: none;
+.detail__for-day {
+    min-height: 650px;
 }
 
-.scroll::-webkit-scrollbar:vertical {
-    width: 12px;
-}
-
-.scroll::-webkit-scrollbar:horizontal {
-    height: 12px;
-}
-
-.scroll::-webkit-scrollbar-thumb:vertical {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    border: 2px solid #ffffff;
-}
-
-.scroll::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #ffffff;
+@media screen and (max-width: 550px) {
+    .scroll-detail__for-day {
+        flex-direction: column;
+        max-height: 580px;
+    }
+    .scroll__day-detail__for-day {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+    }
 }

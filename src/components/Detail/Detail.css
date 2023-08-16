@@ -31,7 +31,6 @@
 .detail__title {
     margin: 0;
     padding: 0;
-    /* color: #fff; */
     text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
     font-family: Overpass;
     font-size: 24px;
@@ -42,7 +41,6 @@
 .detail__subtitle {
     margin: 0;
     padding: 0;
-    /* color: #fff; */
     text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
     font-family: Overpass;
     font-size: 18px;
@@ -78,7 +76,6 @@
     gap: 25px;
 }
 .scroll__temp {
-    /* color: #fff; */
     text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
     font-family: Overpass;
     font-size: 20px;
@@ -87,7 +84,6 @@
     line-height: normal;
 }
 .scroll__time {
-    /* color: #fff; */
     text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
     font-family: Overpass;
     font-size: 18px;
@@ -149,4 +145,36 @@
 }
 .search__item {
     cursor: pointer;
+}
+@media screen and (max-width: 550px) {
+    .detail {
+        padding: 15px;
+    }
+    .detail__img {
+        top: 60px;
+    }
+    .detail__back {
+        margin-bottom: 20px;
+    }
+    .detail__title {
+        font-size: 18px;
+    }
+    .detail__subtitle {
+        font-size: 15px;
+    }
+    .scroll {
+        margin-bottom: 50px;
+        gap: 15px;
+        padding: 0;
+    }
+    .scroll__date {
+        font-size: 15px;
+        width: 50%;
+    }
+    .scroll__day_next-forecast {
+        padding: 5px;
+    }
+    .scroll__temp_next-forecast {
+        font-size: 15px;
+    }
 }

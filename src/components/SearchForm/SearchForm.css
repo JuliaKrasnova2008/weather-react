@@ -80,10 +80,6 @@ ymaps.ymaps-2-1-79-map.ymaps-2-1-79-i-ua_js_yes.ymaps-2-1-79-map-bg.ymaps-2-1-79
     width: 12px;
 }
 
-/* ::-webkit-scrollbar:horizontal {
-    height: 12px;
-} */
-
 .search__list::-webkit-scrollbar-thumb:vertical {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
@@ -93,4 +89,10 @@ ymaps.ymaps-2-1-79-map.ymaps-2-1-79-i-ua_js_yes.ymaps-2-1-79-map-bg.ymaps-2-1-79
 .search__list::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #ffffff;
+}
+
+@media screen and (max-width: 400px) {
+    .search__input-form {
+        padding: 30px 20px;
+    }
 }

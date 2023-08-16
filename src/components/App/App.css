@@ -41,3 +41,8 @@ html[data-theme="light"] {
     --background-color: #ffffff;
     --background-button-color: #ffffffe0;
 }
+@media screen and (max-width: 400px) {
+    .page {
+        padding: 0;
+    }
+}
