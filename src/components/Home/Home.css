@@ -1,0 +1,74 @@
+.home {
+    margin: 0 auto;
+    padding: 52px 31px;
+    border-radius: 15px;
+    position: relative;
+    background: var(--background);
+    color: var(--color);
+    position: relative;
+}
+.home__img {
+    position: absolute;
+    top: 80px;
+    left: 45px;
+}
+.home__map {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.home__city {
+    margin: 0;
+    padding: 0;
+    text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
+    font-family: Overpass;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.home__geolocation {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+}
+.home__button__theme {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+.button__theme {
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+    border: none;
+    color: var(--color);
+    cursor: pointer;
+    font-family: Overpass;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.button__theme_active {
+    border: none;
+    border-bottom: 1px solid var(--color);
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+    color: var(--color);
+    cursor: pointer;
+    font-family: Overpass;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

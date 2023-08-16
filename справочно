@@ -1,0 +1,490 @@
+1. npx create-react-app . - создаем приложение на React. . - указывает, куда сохранить(т.е.в текущую директорию).Качаем огромную библиотеку React.
+(Фреймвор, содержащий много библиотек).
+
+    Компоненты - это все отдельные части страницы, которые содержать свою логику и свою js - структуру. (типо header, main, footer, modal, popupform).
+Каждая js - логика лежит в своем компоненте.
+
+.jsx - реактовское расширение, по сути особой разницы между js нет.
+
+"dependencies": { } - объект, в котором указываются вс установленные библиотеки
+
+npm start - запустить приложение
+npm run build - минифицирует код и размер приложения(создается папка dist)
+
+2. Перед началом нужно почистить реактовскую разметку:
+
+папка public - оставить только index.html, остальное удалить
+файл index.html -
+-удалить комментарии
+- link с подключенными картинками
+- <noscript> тоже удалить, это пояснение
+
+папка src - оставить только файлы App.css, App.js, index.css, index.js
+                App.css - удалить всё
+                App.js - удалить всё содержимое у div class="App" и первый импорт
+                index.css - оставить
+                index.js - удалить:
+                import reportWebVitals from './reportWebVitals';
+                reportWebVitals();
+                комментарии
+                React.StrictMode - два раза генерит страницу, нужно удалить
+
+                const root - главный объект, куда будет генерироваться весь React
+                render - все, что передаем в render генериться на странице
+
+                Полностью обнулили стр., она готова, чтобы в неё вносить свой код.
+
+                В файле index.html - мы ничего больше не пишем, кроме подключения каких-то иконок и шрифтов.
+                Вся работа в папке src.
+                Все стили приложения в файле App.css. Все стили для обнуления и подключения шрифтов в index.css.
+                Стили из App.css импортируем в App.js(они уже импоритированы).
+
+                3. rfc - создать разметку в новом реакт-компоненте.
+
+                4. API
+                Создаем отдельный файл api.js, который содержит все методы для работы приложения:
+
+                Создаем класс Api. Он будет содержать конструктор класса, экспорт его экземпляра, методы для взаимодействия с сервером и состоянием приложения.
+                class Api {
+                    constructor({ baseUrl, headers }) {
+                    this._headers = headers;
+                this._baseUrl = baseUrl;
+    }
+                ОБЯЗАТЕЛЬНЫЕ ФУНКЦИИ:
+                //функция, которая обрабатывает ответ от сервера
+                _handleResponse(response) {
+        //принимает ответ от сервера
+        if (response.ok) {
+            return response.json(); //парсинг, переводим json в форма понятный для js
+        }
+                return Promise.reject(`Произошла ошибка: ${response.status}`); //отлавливаем ошибку
+    }
+                //функция, которая отправляет запрос на сервер
+                _request(url, options) {
+        //ассинхронный запрос на сервер
+        return fetch(url, options).then(this._handleResponse);
+    }
+
+                ФУНКЦИИ, КОТОРЫЙ НЕОБХОДИМЫ ДЛЯ КОНКРЕТНОГО ПРИЛОЖЕНИЯ:
+                Например,
+                //Получение всех пользователей
+                getAllUser() {
+        return this._request(`${this._baseUrl}example=all`, { //example=all - хвостик от неизменяемого адреса
+                    method: "GET",
+                headers: this._headers,
+        });
+    }
+                //Получение всех пользователей определенного департамента
+                getAllUserDepart(depart) {
+        return this._request(`${this._baseUrl}example=${depart}`, {//example=${depart} - хвостик от неизменяемого адреса
+                    method: "GET",
+                headers: this._headers,
+        });
+    }
+                //Запрос, который вернет ошибку
+                returnError() {
+        return this._request(`${this._baseUrl}code=500&__dynamic=true`, {//code=500&__dynamic=true - хвостик от неизменяемого адреса
+                    method: "GET",
+                headers: this._headers,
+        });
+    }
+
+}
+
+                Создаем экземляр класса, к которому в дальнейшем будем обращаться при получении данных
+                const api = new Api({
+                    baseUrl: 'https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users?__', //неизменяемая ссылка url
+                headers: {
+                    "Content-Type": "application/json",
+                accept: "Application/json"
+    }
+})
+
+                export default api;
+
+__________________________________________________________________
+PAGES
+1. установить библиотеку npm i react-router-dom
+2. в файле App.js обернуть нужную страницу в Routes и Route. Указать маршрут, например:
+function App() {
+    return (
+      <div className="page">
+        <div className="page__content">
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </div>
+      </div>
+    );
+  }
+3. в файле index.js обернуть <App /> в   <BrowserRouter></BrowserRouter>
+
+__________________________________________________________________
+
+                Деструктуризация: компонент в свои параметры по умолчанию принимает props. props- это объект, который содержит в себе ключи с названиями
+                и значениями переданный параметров в компонент (напр., <Card elem={obj} name={obj.title} /> Тут ключ - elem и name).
+                Чтобы сразу из пропсов достать ключи с определенным именем можно использ деструктуризацию.
+                Например,
+                в компоненте вместо props сразу указываем имя ключа пропса. ИМЯ ОБЯЗАТЕЛЬНО ДОЛЖНО СОВПАДАТЬ С ТЕМ, ЧТО Я ПЕРЕДАЮ В КОМПОНЕНТЕ
+                export default function Card({elem, name}) {
+                }
+
+                Если мы рендерим несколько одинаковых компонентов, то для того, чтобы React их различал между собой необходимо
+                в пропсы этого компонента передавать ключ key. Это уникальное значение/номер каждого компонента(обычно это id внутри объекта).
+                Например,
+                export default function Cards() {
+    return data.map((obj) => {
+        return <Card elem={obj} key={obj.id} />
+    })
+}
+
+                useState - хук (все функции, которые начинаются со слова use), который нужен для создания изменяемой переменной.
+
+                export default function Counter() {
+  const [count, setCount] = useState(0); count -первоночальная переменная, setCount - функция, которая изменяет переменную count, useState(сюда передаем значение по умолчанию, те чему будет равен count при загрузке)
+                console.log(count)
+                return (
+    )}
+
+                Напрямую в Reacte переменную изменить нельзя. Только с помощью set-функции. Например,count я могу изменить только с помощью функции setCount.
+                Функция setCount принимает кол-бэк функцию, которая принимает в себя предыдущее состояние count. Например:
+                function handlePlus() {
+                    setCount((prevCount) => {
+                        return prevCount + 1;
+                    })
+                }
+
+                Декларативный подход - см.выше, мы не меняем напрямую count и не переприсваеваем значение в InnerHTML.
+
+                onClick={() => setCount((prevCount) => prevCount + 1)} - вызываем сначала анонимную функцию ()=> , чтобы setCount срабатывал не сразу, а только при клике.
+
+                ... - позволяет распаковать массив
+
+                onClick={ } - по умолчанию принимает evt
+
+
+                хук useEfffect - функция-обертка, позволяет обернять сайд/сторонние-эффекты (действия, не связанные с логикой реакта).
+                useEfffect() - принимает в себя 2 параметра. 1- колбэк-функция, 2-массив зависимостей(ВСЕГДА, ДАЖЕ ЕСЛИ ОН ПУСТОЙ)
+                Например,
+        useEffect(()=> {
+                    fetch('https://fakestoreapi.com/products')
+                        .then(res => res.json())
+                        .then(json => setProd(json))
+                }, [])
+
+
+Сайд/сторонние-эффекты:
+-присваивание обраб события через addEventListener
+-запрос на сервер (не связан с реактом)
+
+useEfffect позволяет указать массив зависимостей. Передается колбэк функция, которая отрабатывает при любом изменении элементов из массива зависимостей.
+Если массив зависимостей пустой, то useEfffect отработает 1 раз при рендере компонента.
+
+?????????????????
+export default function Cards({prod}) {
+  return prod?.map((obj) => {-это значит: выполняй map тогда, когда prod был найден
+return <Card elem={obj} key={obj.id} />
+  })
+}
+
+функция createContext() - позволяет создать контекст. Т.е. не нужно прокидывать пропсы через все компоненты.
+Шаблон:
+import React, {createContext, useState} from 'react'
+
+export const CategoryContext = createContext()
+
+export default function CategoryContextProvider({children}) {
+const [currentCateg, setCurrentCateg] = useState('')
+
+return (
+<CategoryContext.Provider value={{ currentCateg, setCurrentCateg }}>
+{children}
+</CategoryContext.Provider>
+)
+}
+Чтобы контекс работыл нужно обернуть приложение App  в провайдер:
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<BrowserRouter>
+<CategoryContextProvider>
+<App />
+</CategoryContextProvider>
+</BrowserRouter>
+);
+Чтобы использовать переменные из контекста нужно вызвать хук useContext(передать в него контекс) и достать оттуда переменные из value:
+<CategoryContext.Provider value={{ currentCateg, setCurrentCateg }}>
+
+
+                    ____________________________________________________________________________________________________________________________
+
+БИБЛИОТЕКА REDUX:
+                    Позволяет создать глобальное хранилище данные внутри приложения.
+                    1-Установка пакетов:
+                    npm i @reduxjs/toolkit - дополнение для редакса, которое облегчает написание кода (синтаксис, функции)
+                    npm i react-redux - сама библиотека для связи реакта с редаксом
+
+                    2-Внутри папки src  создать папку redux;
+                    2.1 - создать файл store.js - он содержит в себе объект, в котором указаны направления для разных хранилищ
+                    (напр, хранилище корзина, избр. товары, информация о пользователе)
+                    c помощью функции export const store = configureStore - создаем глобальное хранилище:
+
+                    export const store = configureStore({
+                        reducer: {
+                        //путь к кусочку хранилища "корзина"
+                        cart: cartReducer,
+                    //путь к кусочку хранилища "избранное"
+                    favorite: favoriteReducer,
+                    user: userReducer,
+    },
+})
+
+3-Нужно обернуть все приложение в провайдер:
+В файле index.js. Тег <Provider>. В него по параметру store передаем экспортируемую константу из файла store.js
+<Provider store={store}>
+<BrowserRouter>
+<CategoryContextProvider>
+<App />
+</CategoryContextProvider>
+</BrowserRouter>
+</Provider>
+
+4-создание кусочка(одного) хранилища:
+внутри redux создать папку slices, внутри создать файл, в котором будет описание хранилища и методы взаимодействия с ним
+Обычно эти файлы называются cart/favorite/info...Reducer
+
+5-описание хранилища и его создание:
+5.1 - создать константу значений по умолчанию с помощью функции:
+export const cartSlice(индивидуальное название для каждого кусочка) = createSlice({ })
+5.2 - далее:
+
+import {createSlice} from "@reduxjs/toolkit"
+
+const initialState = {
+items: [] //по умолчаниб товары в корзине равны пустому массиву 
+}
+export const cartSlice = createSlice({ //с помощью функции createSlice создаем кусочек хранилища
+//создаем ключ-название хранилища
+name: 'cart',
+//передаем начальное состояние
+initialState,
+//описываем функцию для взаимодействия с хранилищем c помощью reducers
+reducers: {
+//сделаем функцию на добавление элементов в корзину ключ-название функции, через : сама функция
+//state, action - переменные, которые передаются по-умолчанию. Всегда.
+//state - это объект, который содержит текущее состояние хранилища. В данный момент state = обекту с ключем items, который хранит []
+//action - объект, через который происходит связь реакта и редакса. С помощью action можно передавать параметры из реакта в в эту функцию.
+//Параментры, которые мы передаем при вызове этой функции в Реакте, хранятся в action.payload
+addItem: (state, action) => {
+state.items.push(action.payload) //в текущее состояние, обращаем к конкретному ключу items из тек.состояния, 
+//добавляем в конец массива то, что передал пользователь при вызове функции
+},
+//функция для очистки корзины
+clearCart: (state, action) => {
+state.items = []
+}}
+})
+export default cartSlice.reducer; //экспортируем хранилище
+export const {addItem, clearCart} = cartSlice.actions; //экспортируем функции (для удобства, чтобы потом обращаться напрямую)
+
+ШАБЛОН, ЧТОБЫ СВЯЗАТЬ REDUX с LOCALSTORAGE (хранилище внутри браузера):
+прописать это  в store.js:
+
+//создаю конст persistedState, пытемся получить localStorage сохраненные данные о всем сторе
+const persistedState = localStorage.getItem("reduxState") ? JSON.parse(localStorage.getItem("reduxState")) : { }
+
+export const store = configureStore({
+reducer: {
+department: departmentReducer,
+},
+//preloadedState- состояние, которое должно подгрузиться сначала, и  в него добавляю данные из localStorage
+preloadedState: persistedState,
+})
+//подписываю store на то, чтобы при каждом изменении в localStorage сохранялся весь store
+store.subscribe(()=> {
+localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
+ ____________________________________________________________________________________________________________________________
+
+
+                        БИБЛИОТЕКА axios - библиотека для отправки запросов, типа:
+
+  useEffect(() => {
+                            axios.get(`https://fakestoreapi.com/products?limit=${count}`)
+                                .then(json => setArr(json.data))
+                        }, [count]);
+
+                        Упращает синтаксис, запрос становится более удобно настраивать.
+
+                        Например, ПОСТ-запрос на axios:
+    useEffect(() => {
+                            axios.post(`https://fakestoreapi.com/products/category/${currentCateg}`, {})
+                                .then(json => setArr(json.data))
+                        }, [currentCateg]);
+
+                        и на js:
+                        fetch("https://api.react-learning.ru/v2/9-gr/users/me",
+                        {
+                            method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                        "Content-Type": "application/json",
+          },body: JSON.stringify({ })
+        })
+
+
+                        axios автоматически переводит полученные объекты в json формат
+                        у axios уже есть headers
+                        в axios метод вызывается сразу через точку
+
+                        ____________________________________________________________________________________________________________________________
+
+                        БИБЛИОТЕКИ YUP и FORMIK - работают в связке друг с другом
+
+                        YUP - нужен для валидации.
+                        Перед использованием нужно самостоятельно прописать импорт import * as Yup from 'yup'
+                        FORMIK  - нужен для построения валидируемых форм. Можем делать контролируемые поля ввода(input). Т.е. с его использованием можно не делать так:
+
+                        const [email, setEmail] = useState('')
+
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        >
+                            в FORMIK это происходит автоиматически.
+                            Теперь <form> это <Form>
+                                а все элементы формы (input, textArea, select ...) становятся <Field>
+
+                                    Для Formik необходимы 3 настроки:
+                                    1- начальные значения initialValues
+                                    2- схема валидации validationSchema
+                                    3- что происходит при отправке формы onSubmit
+                                    4- enableReinitialize={true} нужно для того, если начальное значение не пустое и мы разрешаем Formik сбрасывать форму при изменении новых начальных значений
+
+                                    //начальные значения для Formik
+                                    const initialValues = {
+                                        email: '',
+                                    password: '',
+                                    name: userInfo.name || '',
+    }
+
+    //нужно для валидации формы
+    //у button в Field должно быть обязательное поле type='submit', пока форма не пройдет валидацию, запрос отправлен не будет
+    // компонент для отображения ошибок из Yup <ErrorMessage name="email" component="div" className='error__message' />
+                                    const loginSchema = Yup.object().shape({
+                                        email: Yup.string('Введите корректный email').email('Введите корректный email').required('Обязательное поле для заполнения').min(5, 'Короткий').max(25, 'Длинный'), //ключ email - это строка, эл/адрес, обязательное поле(не пустое), минималье кол-во и максимальное кол-во символов - эти методы взяты из библиотеки Yup
+                                    password: Yup.string('Введите корректный пароль').min(5, 'Короткий').max(25, 'Длинный').required('Обязательное поле для заполнения'),
+    })
+
+    //нужна для отправки формы, пареметр values содержит все компоненты Field
+    const onSubmit = (values) => {
+                                        console.log(values);
+    }
+
+                                    //Структура формы:
+                                    <Formik initialValues={initialValues} validationSchema={loginSchema} onSubmit={onSubmit}>
+                                        {(formik) => {
+                                            return (
+                                                <Form>
+                                                    <Field />
+                                                    <ErrorMessage />
+                                                    <Field />
+                                                    <ErrorMessage />
+                                                    <button type='submit'>Войти</button>
+                                                </Form>
+                                            )
+                                        }}
+                                    </Formik>
+
+
+                                    ____________________________________________________________________________________________________________________________
+
+
+                                    БИБЛИОТЕКА @tanstack/react-query
+                                    Позволяет отправить более настраиваемые запросы (заменяет fetch). Нужна, чтобы отправить запрос в определенном событии,например отправке формы.
+                                    Чтобы query запросы работали в приложении, все приложение нужно обернуть в QueryClientProvider и создать экземпляр класса QueryClient;
+
+                                    const queryClient = new QueryClient();
+
+                                    const root = ReactDOM.createRoot(document.getElementById('root'));
+                                    root.render(
+                                    <QueryClientProvider client={queryClient}>
+                                        <Provider store={store}>
+                                            <BrowserRouter>
+                                                <CategoryContextProvider>
+                                                    <App />
+                                                </CategoryContextProvider>
+                                            </BrowserRouter>
+                                        </Provider>
+                                    </QueryClientProvider>
+                                    );
+
+                                    ____________________________________________________________________________________________________________________________
+                                    БИБЛИОТЕКА react-content-loader
+                                    Позволяет создать скиллетон. Пока закружает настояший товар это отображается. Типо серый макет сайта.
+
+                                    1. Для контроля состояния загрузки в компоненте, где генерируются карточки (например Main) создаем
+                                    const [loading, setLoading] = useState(false);
+                                    И присваем ей начальное значение false
+
+                                    2. Перед отправкой запроса на сервер для получения карточек мы меняем setLoading на true.
+                                    Как только получили ответ от сервера - меняем обратно:
+
+  useEffect(() => {
+                                        setLoading(true)
+    axios.get(`https://fakestoreapi.com/products?limit=${count}`)
+      .then(json => {
+                                        setArr(json.data)
+        setLoading(false)
+      })
+  }, [count]);
+
+useEffect(() => {
+                                        setLoading(true)
+    setTimeout(()=> {
+                                        setLoading(false)
+                                    }, 2000)
+  }, [count]);
+
+3. Создаем компонент Sciletons.js
+И в нем возвращаем разметку самого скиллетона, который мы сделали на сайте https://skeletonreact.com
+Посмотреть пример разметки и попробовать изменить ширину/высоту можно на примере тут: codesandbox.io
+
+4. В main создаем массив из 4х таких скиллетонов. Проходимся по нему и возвращаем разметку скиллетона.
+
+  const sciletons = [...new Array(4)].map(() => <Sciletons />); //так можно создать пустой массив из 8 элементов
+
+5. В зависимости от состояния загрузки возвращаем const sciletons или карточки товара:
+<ul className='products__list'>
+{loading ?
+sciletons
+:
+<Cards prod={arr} />
+}
+</ul>
+________________________________________________________________________________________________________________________
+Если проект уже выложен на firebase. Чтобы внести изменения:
+-npm run build
+-firebase deploy
+
+________________________________________________________________________________________________________________________
+PRELOADER
+Как сделать прелоадер
+Шаг 1. HTML В вашей HTML-разметке прямо под тегом
+
+добавьте div с классом preloader.
+
+Шаг 2. CSS В своем CSS добавьте следующий код:
+
+.preloader {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 9999;
+   background-image: url('../images/default.gif');
+   background-repeat: no-repeat; 
+   background-color: #FFF;
+   background-position: center;
+}
+найти анимированные прелоадеры в Google или Яндекс Картинках или сделать свой собственный с помощью сервиса Loading.io (uliya2008@bk.ru пароль:Qwerty123456!)

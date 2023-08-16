@@ -1,0 +1,96 @@
+.search {
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 0px 0px 30px 30px;
+    background: #fcfcfc;
+    position: relative;
+}
+.search__input-form {
+    margin: 0 auto;
+    padding: 59px 30px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow:
+        -6px 4px 4px 0px rgba(255, 255, 255, 0.1) inset,
+        2px -3px 6px 0px rgba(0, 0, 0, 0.1) inset;
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    border-radius: 0px 0px 30px 30px;
+}
+.search__input-elements {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+.search__input {
+    border: none;
+    background-color: inherit;
+    color: #000000;
+    font-family: Overpass;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.search__input:focus {
+    outline: none;
+}
+.search__back {
+    margin: 0;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+ymaps.ymaps-2-1-79-map.ymaps-2-1-79-i-ua_js_yes.ymaps-2-1-79-map-bg.ymaps-2-1-79-islets_map-lang-en {
+    width: 100%;
+}
+.search__list {
+    margin: 0;
+    padding: 0 30px;
+    list-style-type: none;
+    color: var(--text-fade, #838baa);
+    font-family: Overpass;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    max-height: 165px;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.search__list::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.search__list::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+/* ::-webkit-scrollbar:horizontal {
+    height: 12px;
+} */
+
+.search__list::-webkit-scrollbar-thumb:vertical {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+.search__list::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+}

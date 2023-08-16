@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Weather - погодное приложение
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Веб-приложение, где возможно проверить состояние погоды, ощущаемую температуру, давление, влажность и скорость ветра.
 
-## Available Scripts
+- Прогноз погоды - чистый и понятный интерфейс позволяет пользователям легко получить доступ к необходимой информации, быстро обновить геопозицию, сменить тему приложения. Предложены почасовые, ежедневные и прогнозы на 5 дней. Отображена такая информацию, как температура, влажность, скорость ветра и влажность.
 
-In the project directory, you can run:
+- Значки и графика погоды - иконки на главной и дополнительных страницах отображают различные погодные условия, например, солнечную, облачную, дождливую или снежную погоду.
 
-### `npm start`
+- Доступ к данным в реальном времени - пользователи имеют возможность быстрого доступа к данным в режиме реального времени, без необходимости постоянно обновлять приложение.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Выбор местоположения - предоставлена возможность добавлять в приложение необходимое местоположение вручную и поиск на карте.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- верстка и jsx -->
 
-### `npm test`
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&size=18&pause=1000&color=3456F3&multiline=true&width=500&height=30&lines=%D0%92%D1%91%D1%80%D1%81%D1%82%D0%BA%D0%B0+%D0%B8+JSX)](https://git.io/typing-svg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- HTML5
+- CCS3
+- адаптивная верстка (мобильные устройства, планшеты, десктопы)
+- создание компонентов на React
+- flexbox
+- grid Layout
+- позиционирование
+- псевдоклассы
+- Webpack
+- БЭМ
 
-### `npm run build`
+<!-- функциональность на реакт -->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&size=18&pause=1000&color=3456F3&multiline=true&width=500&height=30&lines=%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C+%D0%BD%D0%B0+%C2%ABReact%C2%BB+%D0%B8+JS)](https://git.io/typing-svg)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- JavaScript (стандарт ES6)
+- React (Create React App, портирование разметки в JSX)
+- Redux
+- API
+- Postman
+- Реализованы асинхронные GET- и POST-запросы к API
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[Спецификация метода API ](https://openweathermap.org/forecast5)
 
-### `npm run eject`
+## Инструкция по установке
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Клонировать репозиторий: git clone
+   `git@github.com:JuliaKrasnova2008/weather-react.git`
+2. Установить зависимости:
+   `npm i`
+3. Запустить приложение:
+   `npm run start`
+4. Запустить сервер с hot-reload:
+   `npm run dev`

@@ -1,0 +1,153 @@
+/* добавляем стиль transform: scale(0) - чтобы не в активном состоянии контент сжимался */
+
+.modal__overlay {
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    min-height: 100%;
+    position: absolute;
+    background: rgba(140, 140, 140, 0.2);
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: 0.5s;
+    pointer-events: none;
+}
+/* добавляем стиль transform: scale(1) - чтобы в активном состоянии контент был в полную ширину и длину */
+.modal__overlay.active {
+    transform: scale(1);
+    pointer-events: all;
+}
+.modal {
+    margin: 0 auto;
+    padding: 53px 53px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border-radius: 30px 30px 0px 0px;
+    background: #fcfcfc;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0%);
+    opacity: var(--opacity);
+}
+
+.modal__title {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 0;
+    color: var(--text-dark, #444e72);
+    text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
+    font-family: Overpass;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+.modal__close-button {
+    margin: 0;
+    padding: 0;
+    background-image: url("../../images/close-overlay-button.svg");
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: inherit;
+    cursor: pointer;
+    border: none;
+    opacity: 0.7;
+}
+.modal__close-button:hover {
+    opacity: 1;
+}
+.modal__weather-block {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%;
+}
+.modal__weather-city {
+    text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
+    font-family: Overpass;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 24px;
+    line-height: 24px;
+    margin-right: auto;
+    color: #09f;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+.modal__weather-date {
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark, #444e72);
+    font-family: Overpass;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+}
+.modal__weather-degree {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 5px;
+    color: var(--text-dark, #444e72);
+    font-family: Overpass;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+    border-bottom: 1px solid #ffea2c;
+    width: 100%;
+}
+.modal__weather-indicator {
+    margin: 0;
+    padding: 0;
+    color: var(--text-fade, #838baa);
+    font-family: Overpass;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+}
+
+/* Сделать многоточие между элементами */
+.modal__weather-indicators-list {
+    max-width: 40em;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow-x: hidden;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.modal__weather-indicators-list .modal__weather-indicator:before {
+    float: left;
+    width: 0;
+    white-space: nowrap;
+    content: ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . "
+        ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . ";
+}
+.modal__weather-indicators-list span:first-child {
+    padding-right: 0.33em;
+    background: white;
+}
+.modal__weather-indicators-list span + span {
+    float: right;
+    padding-left: 0.33em;
+    background: white;
+}
