@@ -38,6 +38,8 @@ https://github.com/JuliaKrasnova2008/weather-react/assets/105483447/b8291e2e-107
 - Postman
 - Реализованы асинхронные GET- и POST-запросы к API
 
+[Ссылка на приложение ](https://weather-react-10c00.web.app/)
+
 [Спецификация метода API ](https://openweathermap.org/forecast5)
 
 ## Инструкция по установке
